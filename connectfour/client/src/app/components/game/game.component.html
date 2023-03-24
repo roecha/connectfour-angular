@@ -1,0 +1,115 @@
+<style>
+
+       tr {
+        cursor: pointer;
+    }
+    tr:hover {
+        background-color: #eee;
+    }
+    td:last-child,
+    th:last-child {
+        text-align: right;
+    }
+
+    .board-piece {
+        width: 90px;
+        height: 90px;
+        margin: 5px 5px 5px 5px;
+        background-size:cover;
+        background-position: center;
+    }
+    
+    img {
+        position: absolute;
+        width: 100px;
+        height: 100px; 
+        padding: 0;
+        margin: 0;
+        transform: translate(-17px, -5px); 
+
+    }
+
+    .game-piece {
+        position: absolute;
+        width: 90px;
+        height: 90px;
+        border-radius: 50px;
+        transform: translate(-12px, 0%); 
+        background-size:cover;
+        background-position: center;
+        border: 2px solid black;
+        
+    }
+
+    #empty {
+        background-color: white;
+    }
+
+    .board-piece-top {
+        width: 90px;
+        height: 90px;
+        margin: 5px 5px 5px 5px;
+        background-size: cover;
+        border-radius: 50px;
+    }
+
+    #top-row {
+        background-color: white;
+    }
+
+    #game-board {
+        width: 700px;
+        height: 600px;
+        border: 1px solid;
+    }
+
+    h1 {
+        margin-top: 20px;
+    }
+</style>
+
+<div class="container" id="game-view" style="margin-top: 1em">
+    <div class="d-grid col-8 mx-auto">
+        <button class="btn btn-primary" id="return-button" [routerLink]="['/home']">
+            Return
+        </button>
+    </div>
+    <div class="container" id="game-board" style="margin-top: 1em;" [ngStyle]="{'background-color': '#'+game.theme.color, 'border-color' :'#'+game.theme.color}">
+        <div class="row" id="top-row">
+
+            <div *ngFor="let num of counter(7) ;let i = index" (click)="addMove(i)" class="board-piece-top col"
+                (mouseenter)="showImage[i] = true" 
+                (mouseleave)="showImage[i] = false" 
+                [style.backgroundImage]="showImage[i] && checkAvailable(i)? 'url(' + game.theme.playerToken.url + ')' : 'none'"
+                [style.backgroundSize]="'cover'"
+                [style.backgroundPosition]="'center'">
+                <img *ngIf="gameOver && isWin" src="https://charity.cs.uwlax.edu/views/cs402/homeworks/hw2/images/winner.gif">
+                <img *ngIf="gameOver && !isWin" src="https://charity.cs.uwlax.edu/views/cs402/homeworks/hw2/images/cry.gif">
+            </div>
+        </div>
+
+        <!-- <div class="board-row row">
+            <div class="board-piece-top col" (click)="addMove(0)"></div>
+            <div class="board-piece-top col" (click)="addMove(1)"></div>
+            <div class="board-piece-top col" (click)="addMove(2)"></div>
+            <div class="board-piece-top col" (click)="addMove(3)"></div>
+            <div class="board-piece-top col" (click)="addMove(4)"></div>
+            <div class="board-piece-top col" (click)="addMove(5)"></div>
+            <div class="board-piece-top col" (click)="addMove(6)"></div>
+
+        </div> -->
+
+        <div *ngFor="let row of gameBoard; let i = index" class="board-row row">    
+            <div *ngFor="let col of row; let j = index"  class="board-piece col">
+                <!-- <div class="game-piece" *ngIf="gameBoard[i][j] === 'X'" src="{{game.theme.playerToken.url}}">
+                <div class="game-piece"  *ngIf="gameBoard[i][j] === 'O'" src="{{game.theme.computerToken.url}}"> -->
+                <div class="game-piece" *ngIf="gameBoard[i][j] === 'X'" [ngStyle]="{'background-image': 'url(../../..' + game.theme.playerToken.url + ')'}"></div>
+                <div class="game-piece" id="computer" *ngIf="gameBoard[i][j] === 'O'" [ngStyle]="{'background-image': 'url(../../..' + game.theme.computerToken.url + ')'}"></div>
+                <div class="game-piece" id="empty" *ngIf="gameBoard[i][j] === ' '"></div>
+            </div>
+        </div>
+
+    </div>
+    <script src="./javascripts/board.js"></script>
+    <h1 class="text-center">{{game.status}}</h1>
+</div>

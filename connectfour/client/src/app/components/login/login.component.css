@@ -1,0 +1,33 @@
+
+#login-form {
+   max-width : 600px;
+   min-width: 300px;
+   padding: 15px;
+   background-color : #eee;
+   border-radius: .5em;
+   margin-top: 10em;
+   border: px solid black;
+
+}
+
+.things-title {
+   font-size: 400%;
+   text-shadow : 3px 3px 3px black;
+   font-family : 'Montserrat', sans-serif;
+   font-weight : bold;
+   color : white;
+   letter-spacing : 3px;
+}
+
+.background {
+   position: absolute;
+   background-image: url("../../../assets/Poker-chips-falling-loop-alpha_003.jpg");
+   background-position: center center;
+   background-repeat: no-repeat;
+   background-attachment: fixed;
+   background-size: cover; /* rescales the image to cover the window */
+   
+   background-color: #464646; /* shown during image load */
+   height: 93.5vh !important;
+   width: 100vw !important;
+ }

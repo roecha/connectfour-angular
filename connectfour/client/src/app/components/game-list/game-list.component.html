@@ -1,0 +1,57 @@
+
+<div class="container" id="user-view" style="margin-top: 1em">
+    <form class="row">
+        <div class="input-group col">
+            <span class="input-group-text">Color</span>
+            <input type="color" name = "color" id ="color-select" class="form-control form-control-color" [(ngModel)]="gameTheme.color"/>
+        </div>
+        <div class="input-group col">
+            <span class="input-group-text">Player</span>
+            <select id="player-select" name = "select" class="form-control" [(ngModel)]="gameTheme.playerToken">
+                {{gameTheme.playerToken}}
+                <option *ngFor="let token of metadata.tokens; let i = index" [value]="metadata.tokens[i].id">
+                    {{metadata.tokens[i].name}}
+                </option>
+            </select>
+        </div>
+        <div class="input-group col">
+            <span class="input-group-text">Computer</span>
+            <select id="computer-select" name="select" class="form-control" [(ngModel)]="gameTheme.computerToken">
+                {{gameTheme.computerToken}}
+                <option *ngFor="let token of metadata.tokens; let i = index" [value]="metadata.tokens[i].id">
+                    {{metadata.tokens[i].name}}
+                </option>
+            </select>
+        </div>
+        <button type="submit" (click)="createGame()" class="btn btn-primary col" id="create-button">
+            CREATE
+        </button>
+        <button type="submit" (click)="setDefault()" class="btn btn-secondary col" id="create-button" style="margin-left: 10px;">
+            SET DEFAULT 
+        </button>
+    </form>
+</div>
+
+<div class="container" id="game-data" style="margin-top: 1em">
+    <table class="table">
+        <thead class="table-secondary">
+            <tr>
+                <th scope="col">Status</th>
+                <th scope="col">Player</th>
+                <th scope="col">Computer</th>
+                <th scope="col">Time Started</th>
+                <th scope="col">Time Finished</th>
+                <th></th>
+            </tr>
+            <tr *ngFor="let game of gameList">       
+                <td class="align-baseline">{{game.status}}</td>
+                <td><img src="../../..{{game.theme.playerToken.url}}"></td>
+                <td><img src="../../..{{game.theme.computerToken.url}}"></td>
+                <td class="align-baseline">{{game.start}}</td>
+                <td class="align-baseline">{{game.finish}}</td>
+                <td class="align-baseline"><button class="btn" [routerLink]="['/gids', game.id]" [ngStyle]="{'background-color': '#'+game.theme.color}">view</button></td>
+            </tr>
+
+        </thead>
+    </table>
+</div>

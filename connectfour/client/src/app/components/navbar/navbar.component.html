@@ -1,0 +1,15 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+   <div class="container-fluid">
+      <a class="navbar-brand" href="#">Listly</a>
+ 
+      <div class="collapse navbar-collapse" id="profile">
+         <ul class="navbar-nav" style="position:absolute;right:0;margin-right:3em;">
+           <li class="nav-item" *ngIf="isAuthenticated()">
+             <a class="nav-link" (click)="logout()" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+               <span>{{this.user?.email}}</span>
+             </a> 
+           </li>
+         </ul>
+       </div>
+   </div>
+ </nav>
