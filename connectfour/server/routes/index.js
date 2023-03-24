@@ -11,6 +11,7 @@ let Metadata = require("../models/metadata.js");
 let Game = require("../models/game.js");
 let Error = require("../models/error.js");
 const app = require("../app.js");
+const { json } = require("express");
 
 let gamesList = {};
 let tokenList = [
@@ -85,7 +86,6 @@ function updateGameBoard(gid, move, isPlayer, playerID) {
             }
         }
     }
-
     // Check if the game is finished
     let winner = checkWin(gid, playerID);
     if (winner !== " ") {
@@ -147,7 +147,7 @@ function checkWin(gid, playerID) {
             }
         }
     }
-    // Check diagonals
+    // Check diagonal
     for (let i = 0; i < 2; i++) {
         for (let j = 0; j < 4; j++) {
             if (
@@ -173,8 +173,9 @@ function checkWin(gid, playerID) {
         }
     }
 
+
     // check for a tie
-    for (let i = 0; i < 7; i++) {cd
+    for (let i = 0; i < 7; i++) {
         if (gameBoard[0][i] === " ") {
             break;
         } else {
@@ -183,6 +184,7 @@ function checkWin(gid, playerID) {
             }
         }
     }
+
     // no winner
     return " ";
 }
@@ -236,7 +238,9 @@ router.get("/gids/:gid", function (req, res, next) {
 
 router.post("/gids/:gid", function (req, res, next) {
     const { gid } = req.params;
-    res.status(200).send(updateGameBoard(gid, req.query.move, true, req.session.user._id));
+    res.status(200).send(
+        updateGameBoard(gid, req.query.move, true, req.session.user._id)
+    );
 });
 
 router.get("/who", (req, res, next) => {

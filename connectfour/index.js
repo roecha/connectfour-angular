@@ -22,8 +22,10 @@ let tokenList = [
     new Token(4, "Space Cadet", "/assets/NMS.jpg"),
 ];
 
-// TODO
-// Create 2d list with sids and game ids
+
+new userDb.User("bilbo@mordor.org", "111111111", "");
+new userDb.User("frodo@mordor.org", "222222222", "");
+new userDb.User("samwise@mordor.org", "333333333", "");
 
 let currentTheme = new Theme(
     "#FF0000",
@@ -184,11 +186,6 @@ function checkWin(gid) {
     // no winner
     return " ";
 }
-
-
-new userDb.User("bilbo@mordor.org", "111111111", "");
-new userDb.User("frodo@mordor.org", "222222222", "");
-new userDb.User("samwise@mordor.org", "333333333", "");
 
 /////////////////// END OF DB ///////////////////////
 
